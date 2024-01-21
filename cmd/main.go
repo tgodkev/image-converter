@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+    "imageutils/cropimage"
 )
 
 var (
@@ -44,51 +45,18 @@ func main() {
 }
 
 // ProcessImage - function for image processing
-func ProcessImage(path string, cropSize string, quality int, conversionFormat string) {
-	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", path, cropSize, quality, conversionFormat)
+func ProcessImage(fileName string, cropSize string, quality int, conversionFormat string) {
+	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", fileName, cropSize, quality, conversionFormat)
 
 	if cropSize != "0x0" {
 		dimensions := strings.Split(cropSize, "x")
 
-		if len(dimensions) == 2 {
-			heightStr, widthStr := dimensions[0], dimensions[1]
-
-			// Convert heightStr and widthStr to integers
-			height, err := strconv.Atoi(heightStr)
-			if err != nil {
-				fmt.Printf("Invalid height: %s\n", heightStr)
-				return
-			}
-
-			width, err := strconv.Atoi(widthStr)
-			if err != nil {
-				fmt.Printf("Invalid width: %s\n", widthStr)
-				return
-			}
-
-			img, err := imaging.Open(path)
-			if err != nil {
-				fmt.Printf("Failed to open image: %s\n", err)
-				return
-			}
-
-			resizedImg := imaging.Resize(img, height, width, imaging.Lanczos)
-
-			outputFilePath := "resized_" + path
-			err = imaging.Save(resizedImg, outputFilePath)
-
-			fmt.Printf("Image processed and saved to %s\n", outputFilePath)
-
-			if err != nil {
-				fmt.Printf("Failed to save resized image: %s\n", err)
-				return
-			}
-
-		} else {
-			fmt.Printf("Invalid crop size: %s\n", cropSize)
-			return
+        err := cropimage.CropImage(fileName, dimensions)
+        if err != nil {
+            fmt.Printf("Failed to crop image: %s\n", err)
+            return
+        }
 		}
-	}
 
 	// Example: if quality < 100 { /* Compression logic */ }
 	// Example: if conversionFormat != "" { /* Conversion logic */ }
