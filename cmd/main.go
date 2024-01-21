@@ -37,7 +37,7 @@ func main() {
 		go func(fileName string) {
 			defer wg.Done()
 			ProcessImage(fileName, *resize, *quality, *format)
-			// Add your logic to handle resizing, compression, and conversion
+
 		}(file.Name())
 	}
 	wg.Wait()
