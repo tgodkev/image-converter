@@ -47,7 +47,7 @@ func main() {
 func ProcessImage(path string, cropSize string, quality int, conversionFormat string) {
 	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", path, cropSize, quality, conversionFormat)
 
-	if cropSize != "" {
+	if cropSize != "0x0" {
 		dimensions := strings.Split(cropSize, "x")
 
 		if len(dimensions) == 2 {
