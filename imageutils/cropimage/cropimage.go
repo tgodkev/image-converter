@@ -1,4 +1,4 @@
-package cropimage
+package imageutils
 
 import (
 	"fmt"
@@ -10,6 +10,8 @@ import (
 func CropImage(fileName string, dimensions string) error {
 	if dimensions != "0x0" {
 		parts := strings.Split(dimensions, "x")
+
+        fmt.Printf("parts: %v\n", parts)
 		if len(parts) == 2 {
 			heightStr, widthStr := parts[0], parts[1]
 

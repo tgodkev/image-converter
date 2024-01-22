@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/disintegration/imaging"
+//	"github.com/disintegration/imaging"
+	"mymodule/imageutils/cropimage"
 	"os"
-	"strconv"
-	"strings"
+//	"strconv"
+//	"strings"
 	"sync"
-    "imageutils/cropimage"
 )
 
 var (
@@ -49,14 +49,14 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", fileName, cropSize, quality, conversionFormat)
 
 	if cropSize != "0x0" {
-		dimensions := strings.Split(cropSize, "x")
 
-        err := cropimage.CropImage(fileName, dimensions)
-        if err != nil {
-            fmt.Printf("Failed to crop image: %s\n", err)
-            return
-        }
+
+		err := imageutils.CropImage(fileName, cropSize)
+		if err != nil {
+			fmt.Printf("Failed to crop image: %s\n", err)
+			return
 		}
+	}
 
 	// Example: if quality < 100 { /* Compression logic */ }
 	// Example: if conversionFormat != "" { /* Conversion logic */ }
