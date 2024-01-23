@@ -7,6 +7,8 @@ import(
 
 )
 
+
+
 func CompressImage(fileName string, quality int) error {
 
     src, err := imaging.Open(fileName)

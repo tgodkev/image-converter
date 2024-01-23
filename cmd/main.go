@@ -4,10 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"mymodule/imageutils"
-
 	"os"
-//	"strconv"
-//	"strings"
 	"sync"
 )
 
@@ -45,23 +42,36 @@ func main() {
 }
 
 // ProcessImage - function for image processing
-func ProcessImage(fileName string, cropSize string, quality int, conversionFormat string) {
+func ProcessImage(fileName string, cropSize string, quality int, conversionFormat string) error {
 	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", fileName, cropSize, quality, conversionFormat)
 
 	if cropSize != "0x0" {
 
-
 		err := imageutils.CropImage(fileName, cropSize)
 		if err != nil {
-			fmt.Printf("Failed to crop image: %s\n", err)
-			return
+
+			return fmt.Errorf("Failed to crop image: %s\n", err)
 		}
 	}
 
-     if quality < 100 {
-         imageutils.CompressImage(fileName, quality)
+	if quality < 100 {
+		err := imageutils.CompressImage(fileName, quality)
+		if err != nil {
+
+			return fmt.Errorf("Failed to compress image: %s\n", err)
+		}
+
+	}
+	 if conversionFormat != "" {
+    //create a new function in imageutils.go to convert image
+
+        err := imageutils.ConvertImage(fileName, conversionFormat)
+        if err != nil {
+            return fmt.Errorf("Failed to convert image: %s\n", err)
+        }
 
 
      }
-	// Example: if conversionFormat != "" { /* Conversion logic */ }
+
+	return nil
 }
