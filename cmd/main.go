@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-//	"github.com/disintegration/imaging"
-	"mymodule/imageutils/cropimage"
+	"mymodule/imageutils"
+
 	"os"
 //	"strconv"
 //	"strings"
