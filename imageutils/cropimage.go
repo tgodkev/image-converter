@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func CropImage(fileName string, dimensions string) error {
+func CropImage(fileName string, dimensions string)  error{
 	if dimensions != "0x0" {
 		parts := strings.Split(dimensions, "x")
 

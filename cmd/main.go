@@ -58,6 +58,10 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		}
 	}
 
-	// Example: if quality < 100 { /* Compression logic */ }
+     if quality < 100 {
+         imageutils.CompressImage(fileName, quality)
+
+
+     }
 	// Example: if conversionFormat != "" { /* Conversion logic */ }
 }
