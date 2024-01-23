@@ -48,6 +48,6 @@ func CropImage(fileName string, dimensions string) error {
 		}
 	}
 
-	return nil
+return nil
 }
 
