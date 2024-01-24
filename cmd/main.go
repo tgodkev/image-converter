@@ -54,6 +54,8 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		}
 	}
 
+	fmt.Println("Skipping resizing image")
+
 	if quality < 100 {
 		fmt.Println("Compressing image")
 		err := imageutils.CompressImage(fileName, quality)
@@ -63,6 +65,8 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		}
 
 	}
+
+	fmt.Println("Skipping converting image")
 	if conversionFormat != "" {
 
 		fmt.Println("Converting image")
@@ -73,6 +77,8 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		}
 
 	}
+
+	fmt.Println("Skipping renaming image")
 
 	return nil
 }
