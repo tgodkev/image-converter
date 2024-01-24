@@ -22,7 +22,7 @@ func main() {
 
 	files, err := os.ReadDir(*dir)
 	if err != nil {
-		fmt.Printf("Failed to read directory: %v\n", err)
+		fmt.Printf("Failed to read directory: %v", err)
 		return
 	}
 
@@ -50,7 +50,7 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		err := imageutils.CropImage(fileName, cropSize)
 		if err != nil {
 
-			return fmt.Errorf("Failed to crop image: %s\n", err)
+			return fmt.Errorf("Failed to crop image: %v", err)
 		}
 	}
 
@@ -58,16 +58,16 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		err := imageutils.CompressImage(fileName, quality)
 		if err != nil {
 
-			return fmt.Errorf("Failed to compress image: %s\n", err)
+			return fmt.Errorf("Failed to compress image: %v", err)
 		}
 
 	}
 	 if conversionFormat != "" {
-    //create a new function in imageutils.go to convert image
+   
 
         err := imageutils.ConvertImage(fileName, conversionFormat)
         if err != nil {
-            return fmt.Errorf("Failed to convert image: %s\n", err)
+            return fmt.Errorf("Failed to convert image: %v", err)
         }
 
 
