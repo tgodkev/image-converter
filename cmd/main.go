@@ -46,7 +46,7 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 	fmt.Printf("Processing %s: CropSize=%d, Quality=%d, ConvertTo=%s\n", fileName, cropSize, quality, conversionFormat)
 
 	if cropSize != "0x0" {
-
+		fmt.Println("Cropping image")
 		err := imageutils.CropImage(fileName, cropSize)
 		if err != nil {
 
@@ -55,6 +55,7 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 	}
 
 	if quality < 100 {
+		fmt.Println("Compressing image")
 		err := imageutils.CompressImage(fileName, quality)
 		if err != nil {
 
@@ -62,16 +63,16 @@ func ProcessImage(fileName string, cropSize string, quality int, conversionForma
 		}
 
 	}
-	 if conversionFormat != "" {
-   
+	if conversionFormat != "" {
 
-        err := imageutils.ConvertImage(fileName, conversionFormat)
-        if err != nil {
-            return fmt.Errorf("Failed to convert image: %v", err)
-        }
+		fmt.Println("Converting image")
 
+		err := imageutils.ConvertImage(fileName, conversionFormat)
+		if err != nil {
+			return fmt.Errorf("Failed to convert image: %v", err)
+		}
 
-     }
+	}
 
 	return nil
 }
