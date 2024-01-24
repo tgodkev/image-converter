@@ -10,8 +10,9 @@ import(
 
 
 func ConvertImage(fileName string, format string) ( error) {
-
+      fmt.Println("Converting image starting now!")
     srcImg, err := imaging.Open(fileName)
+    fmt.Println("Converting image to "+format)
     if err != nil{
     return fmt.Errorf("Error: %v" ,err)  
     }
